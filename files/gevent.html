@@ -1,0 +1,794 @@
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <!-- Start book 多任务 -->
+    <head>
+        <!-- head:start -->
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>多任务-协程 | 多任务</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 2.6.7">
+        
+        
+        <meta name="HandheldFriendly" content="true"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+        <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+        
+    <link rel="stylesheet" href="../gitbook/style.css">
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-toggle-chapters/toggle.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-splitter/splitter.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-tbfed-pagefooter/footer.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-emphasize/plugin.css">
+        
+    
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-mcqx/mcqx.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-katex/katex.min.css">
+        
+    
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-sectionx/sectionx.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-highlight/website.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-search/search.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-fontsettings/website.css">
+        
+    
+    
+
+        
+    
+    
+    <link rel="next" href="../files/gevent01.html" />
+    
+    
+    <link rel="prev" href="../files/multiprocessing05.html" />
+    
+
+        <!-- head:end -->
+    </head>
+    <body>
+        <!-- body:start -->
+        
+    <div class="book"
+        data-level="5"
+        data-chapter-title="多任务-协程"
+        data-filepath="files/gevent.md"
+        data-basepath=".."
+        data-revision="Mon Jul 15 2019 23:28:46 GMT+0800 (中国标准时间)"
+        data-innerlanguage="">
+    
+
+<div class="book-summary">
+    <nav role="navigation">
+        <ul class="summary">
+            
+            
+            
+            
+
+            
+
+            
+    
+        <li class="chapter " data-level="0" data-path="index.html">
+            
+                
+                    <a href="../index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                        介绍
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1" data-path="files/udp.html">
+            
+                
+                    <a href="../files/udp.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.</b>
+                        
+                        .网络编程UDP
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.1" data-path="files/udp02.html">
+            
+                
+                    <a href="../files/udp02.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.1.</b>
+                        
+                        ip地址
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="files/udp03.html">
+            
+                
+                    <a href="../files/udp03.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.2.</b>
+                        
+                        端口
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="files/udp04.html">
+            
+                
+                    <a href="../files/udp04.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.3.</b>
+                        
+                        socket
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="files/udp05.html">
+            
+                
+                    <a href="../files/udp05.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.4.</b>
+                        
+                        udp网络程序
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="files/udp06.html">
+            
+                
+                    <a href="../files/udp06.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.5.</b>
+                        
+                        udp案例
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2" data-path="files/tcp.html">
+            
+                
+                    <a href="../files/tcp.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.</b>
+                        
+                        网络编程TCP
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1" data-path="files/tcp01.html">
+            
+                
+                    <a href="../files/tcp01.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.1.</b>
+                        
+                        tcp简介
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="files/tcp02.html">
+            
+                
+                    <a href="../files/tcp02.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.2.</b>
+                        
+                        tcp程序-客户端
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="files/tcp03.html">
+            
+                
+                    <a href="../files/tcp03.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.3.</b>
+                        
+                        tcp程序-服务器
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="files/tcp04.html">
+            
+                
+                    <a href="../files/tcp04.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.4.</b>
+                        
+                        tcp案例
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="files/tcp05.html">
+            
+                
+                    <a href="../files/tcp05.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.5.</b>
+                        
+                        tcp3次握手四次挥手
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.6" data-path="files/tcp06.html">
+            
+                
+                    <a href="../files/tcp06.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.6.</b>
+                        
+                        tcp长短连接
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.7" data-path="files/tcp07.html">
+            
+                
+                    <a href="../files/tcp07.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.7.</b>
+                        
+                        tcp/ip 协议
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="3" data-path="files/threading.html">
+            
+                
+                    <a href="../files/threading.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.</b>
+                        
+                        多任务-线程
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="3.1" data-path="files/threding01.html">
+            
+                
+                    <a href="../files/threding01.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.1.</b>
+                        
+                        多任务介绍
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="files/threding02.html">
+            
+                
+                    <a href="../files/threding02.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.2.</b>
+                        
+                        线程
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="files/ithreding03.html">
+            
+                
+                    <a href="../files/ithreding03.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.3.</b>
+                        
+                        线程补充
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4" data-path="files/ithreding04.html">
+            
+                
+                    <a href="../files/ithreding04.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.4.</b>
+                        
+                        线程共享全局变量
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="3.5" data-path="files/ithreding05.html">
+            
+                
+                    <a href="../files/ithreding05.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.5.</b>
+                        
+                        同步与互斥
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="3.6" data-path="files/ithreding06.html">
+            
+                
+                    <a href="../files/ithreding06.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.6.</b>
+                        
+                        互斥锁
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="3.7" data-path="files/ithreding07.html">
+            
+                
+                    <a href="../files/ithreding07.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.7.</b>
+                        
+                        死锁
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="3.8" data-path="files/ithreding08.html">
+            
+                
+                    <a href="../files/ithreding08.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.8.</b>
+                        
+                        多线程UDP聊天器
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="4" data-path="files/multiprocessing.html">
+            
+                
+                    <a href="../files/multiprocessing.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.</b>
+                        
+                        多任务-进程
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="4.1" data-path="files/multiprocessing01.html">
+            
+                
+                    <a href="../files/multiprocessing01.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.1.</b>
+                        
+                        进程与线程
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="files/multiprocessing02.html">
+            
+                
+                    <a href="../files/multiprocessing02.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.2.</b>
+                        
+                        进程的创建
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.3" data-path="files/multiprocessing03.html">
+            
+                
+                    <a href="../files/multiprocessing03.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.3.</b>
+                        
+                        进程间通信
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.4" data-path="files/multiprocessing04.html">
+            
+                
+                    <a href="../files/multiprocessing04.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.4.</b>
+                        
+                        进程池Pool
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.5" data-path="files/multiprocessing05.html">
+            
+                
+                    <a href="../files/multiprocessing05.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.5.</b>
+                        
+                        多进程拷贝文件
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter active" data-level="5" data-path="files/gevent.html">
+            
+                
+                    <a href="../files/gevent.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.</b>
+                        
+                        多任务-协程
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="5.1" data-path="files/gevent01.html">
+            
+                
+                    <a href="../files/gevent01.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.1.</b>
+                        
+                        协程的创建yield
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" data-path="files/gevent02.html">
+            
+                
+                    <a href="../files/gevent02.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.2.</b>
+                        
+                        协程的创建greenlet
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.3" data-path="files/gevent03.html">
+            
+                
+                    <a href="../files/gevent03.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.3.</b>
+                        
+                        协程的创建gevent
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.4" data-path="files/gevent04.html">
+            
+                
+                    <a href="../files/gevent04.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.4.</b>
+                        
+                        协程并发下载
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+
+            
+            <li class="divider"></li>
+            <li>
+                <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+                    本书使用 GitBook 发布
+                </a>
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header" role="navigation">
+    <!-- Actions Left -->
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../" >多任务</a>
+    </h1>
+</div>
+
+            <div class="page-wrapper" tabindex="-1" role="main">
+                <div class="page-inner">
+                
+                
+                    <section class="normal" id="section-">
+                    
+                        <h1 id="&#x591A;&#x4EFB;&#x52A1;&#x534F;&#x7A0B;">&#x591A;&#x4EFB;&#x52A1;-&#x534F;&#x7A0B;</h1>
+<h2 id="&#x8FDB;&#x7A0B;&#x3001;&#x7EBF;&#x7A0B;&#x3001;&#x534F;&#x7A0B;&#x5BF9;&#x6BD4;">&#x8FDB;&#x7A0B;&#x3001;&#x7EBF;&#x7A0B;&#x3001;&#x534F;&#x7A0B;&#x5BF9;&#x6BD4;</h2>
+<h4 id="&#x8BF7;&#x4ED4;&#x7EC6;&#x7406;&#x89E3;&#x5982;&#x4E0B;&#x7684;&#x901A;&#x4FD7;&#x63CF;&#x8FF0;">&#x8BF7;&#x4ED4;&#x7EC6;&#x7406;&#x89E3;&#x5982;&#x4E0B;&#x7684;&#x901A;&#x4FD7;&#x63CF;&#x8FF0;</h4>
+<ul>
+<li>&#x6709;&#x4E00;&#x4E2A;&#x8001;&#x677F;&#x60F3;&#x8981;&#x5F00;&#x4E2A;&#x5DE5;&#x5382;&#x8FDB;&#x884C;&#x751F;&#x4EA7;&#x67D0;&#x4EF6;&#x5546;&#x54C1;&#xFF08;&#x4F8B;&#x5982;&#x79CB;&#x88E4;&#xFF09;</li>
+<li>&#x4ED6;&#x9700;&#x8981;&#x82B1;&#x4E00;&#x4E9B;&#x8D22;&#x529B;&#x7269;&#x529B;&#x5236;&#x4F5C;&#x4E00;&#x6761;&#x751F;&#x4EA7;&#x7EBF;&#xFF0C;&#x8FD9;&#x4E2A;&#x751F;&#x4EA7;&#x7EBF;&#x4E0A;&#x6709;&#x5F88;&#x591A;&#x7684;&#x5668;&#x4EF6;&#x4EE5;&#x53CA;&#x6750;&#x6599;&#x8FD9;&#x4E9B;&#x6240;&#x6709;&#x7684; &#x4E3A;&#x4E86;&#x80FD;&#x591F;&#x751F;&#x4EA7;&#x79CB;&#x88E4;&#x800C;&#x51C6;&#x5907;&#x7684;&#x8D44;&#x6E90;&#x79F0;&#x4E4B;&#x4E3A;&#xFF1A;&#x8FDB;&#x7A0B;</li>
+<li>&#x53EA;&#x6709;&#x751F;&#x4EA7;&#x7EBF;&#x662F;&#x4E0D;&#x80FD;&#x591F;&#x8FDB;&#x884C;&#x751F;&#x4EA7;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x8001;&#x677F;&#x7684;&#x627E;&#x4E2A;&#x5DE5;&#x4EBA;&#x6765;&#x8FDB;&#x884C;&#x751F;&#x4EA7;&#xFF0C;&#x8FD9;&#x4E2A;&#x5DE5;&#x4EBA;&#x80FD;&#x591F;&#x5229;&#x7528;&#x8FD9;&#x4E9B;&#x6750;&#x6599;&#x6700;&#x7EC8;&#x4E00;&#x6B65;&#x6B65;&#x7684;&#x5C06;&#x79CB;&#x88E4;&#x505A;&#x51FA;&#x6765;&#xFF0C;&#x8FD9;&#x4E2A;&#x6765;&#x505A;&#x4E8B;&#x60C5;&#x7684;&#x5DE5;&#x4EBA;&#x79F0;&#x4E4B;&#x4E3A;&#xFF1A;&#x7EBF;&#x7A0B;</li>
+<li>&#x8FD9;&#x4E2A;&#x8001;&#x677F;&#x4E3A;&#x4E86;&#x63D0;&#x9AD8;&#x751F;&#x4EA7;&#x7387;&#xFF0C;&#x60F3;&#x5230;3&#x79CD;&#x529E;&#x6CD5;&#xFF1A;<ol>
+<li>&#x5728;&#x8FD9;&#x6761;&#x751F;&#x4EA7;&#x7EBF;&#x4E0A;&#x591A;&#x62DB;&#x4E9B;&#x5DE5;&#x4EBA;&#xFF0C;&#x4E00;&#x8D77;&#x6765;&#x505A;&#x79CB;&#x88E4;&#xFF0C;&#x8FD9;&#x6837;&#x6548;&#x7387;&#x662F;&#x6210;&#x500D;&#x5897;&#x957F;&#xFF0C;&#x5373;&#x5355;&#x8FDB;&#x7A0B; &#x591A;&#x7EBF;&#x7A0B;&#x65B9;&#x5F0F;</li>
+<li>&#x8001;&#x677F;&#x53D1;&#x73B0;&#x8FD9;&#x6761;&#x751F;&#x4EA7;&#x7EBF;&#x4E0A;&#x7684;&#x5DE5;&#x4EBA;&#x4E0D;&#x662F;&#x8D8A;&#x591A;&#x8D8A;&#x597D;&#xFF0C;&#x56E0;&#x4E3A;&#x4E00;&#x6761;&#x751F;&#x4EA7;&#x7EBF;&#x7684;&#x8D44;&#x6E90;&#x4EE5;&#x53CA;&#x6750;&#x6599;&#x6BD5;&#x7ADF;&#x6709;&#x9650;&#xFF0C;&#x6240;&#x4EE5;&#x8001;&#x677F;&#x53C8;&#x82B1;&#x4E86;&#x4E9B;&#x8D22;&#x529B;&#x7269;&#x529B;&#x8D2D;&#x7F6E;&#x4E86;&#x53E6;&#x5916;&#x4E00;&#x6761;&#x751F;&#x4EA7;&#x7EBF;&#xFF0C;&#x7136;&#x540E;&#x518D;&#x62DB;&#x4E9B;&#x5DE5;&#x4EBA;&#x8FD9;&#x6837;&#x6548;&#x7387;&#x53C8;&#x518D;&#x4E00;&#x6B65;&#x63D0;&#x9AD8;&#x4E86;&#xFF0C;&#x5373;&#x591A;&#x8FDB;&#x7A0B; &#x591A;&#x7EBF;&#x7A0B;&#x65B9;&#x5F0F;</li>
+<li>&#x8001;&#x677F;&#x53D1;&#x73B0;&#xFF0C;&#x73B0;&#x5728;&#x5DF2;&#x7ECF;&#x6709;&#x4E86;&#x5F88;&#x591A;&#x6761;&#x751F;&#x4EA7;&#x7EBF;&#xFF0C;&#x5E76;&#x4E14;&#x6BCF;&#x6761;&#x751F;&#x4EA7;&#x7EBF;&#x4E0A;&#x5DF2;&#x7ECF;&#x6709;&#x5F88;&#x591A;&#x5DE5;&#x4EBA;&#x4E86;&#xFF08;&#x5373;&#x7A0B;&#x5E8F;&#x662F;&#x591A;&#x8FDB;&#x7A0B;&#x7684;&#xFF0C;&#x6BCF;&#x4E2A;&#x8FDB;&#x7A0B;&#x4E2D;&#x53C8;&#x6709;&#x591A;&#x4E2A;&#x7EBF;&#x7A0B;&#xFF09;&#xFF0C;&#x4E3A;&#x4E86;&#x518D;&#x6B21;&#x63D0;&#x9AD8;&#x6548;&#x7387;&#xFF0C;&#x8001;&#x677F;&#x60F3;&#x4E86;&#x4E2A;&#x635F;&#x62DB;&#xFF0C;&#x89C4;&#x5B9A;&#xFF1A;&#x5982;&#x679C;&#x67D0;&#x4E2A;&#x5458;&#x5DE5;&#x5728;&#x4E0A;&#x73ED;&#x65F6;&#x4E34;&#x65F6;&#x6CA1;&#x4E8B;&#x6216;&#x8005;&#x518D;&#x7B49;&#x5F85;&#x67D0;&#x4E9B;&#x6761;&#x4EF6;&#xFF08;&#x6BD4;&#x5982;&#x7B49;&#x5F85;&#x53E6;&#x4E00;&#x4E2A;&#x5DE5;&#x4EBA;&#x751F;&#x4EA7;&#x5B8C;&#x8C0B;&#x9053;&#x5DE5;&#x5E8F; &#x4E4B;&#x540E;&#x4ED6;&#x624D;&#x80FD;&#x518D;&#x6B21;&#x5DE5;&#x4F5C;&#xFF09; &#xFF0C;&#x90A3;&#x4E48;&#x8FD9;&#x4E2A;&#x5458;&#x5DE5;&#x5C31;&#x5229;&#x7528;&#x8FD9;&#x4E2A;&#x65F6;&#x95F4;&#x53BB;&#x505A;&#x5176;&#x5B83;&#x7684;&#x4E8B;&#x60C5;&#xFF0C;&#x90A3;&#x4E48;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#xFF1A;&#x5982;&#x679C;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x7B49;&#x5F85;&#x67D0;&#x4E9B;&#x6761;&#x4EF6;&#xFF0C;&#x53EF;&#x4EE5;&#x5145;&#x5206;&#x5229;&#x7528;&#x8FD9;&#x4E2A;&#x65F6;&#x95F4;&#x53BB;&#x505A;&#x5176;&#x5B83;&#x4E8B;&#x60C5;&#xFF0C;&#x5176;&#x5B9E;&#x8FD9;&#x5C31;&#x662F;&#xFF1A;&#x534F;&#x7A0B;&#x65B9;&#x5F0F;</li>
+</ol>
+</li>
+</ul>
+<h4 id="&#x7B80;&#x5355;&#x603B;&#x7ED3;">&#x7B80;&#x5355;&#x603B;&#x7ED3;</h4>
+<ol>
+<li>&#x8FDB;&#x7A0B;&#x662F;&#x8D44;&#x6E90;&#x5206;&#x914D;&#x7684;&#x5355;&#x4F4D;</li>
+<li>&#x7EBF;&#x7A0B;&#x662F;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x8C03;&#x5EA6;&#x7684;&#x5355;&#x4F4D;</li>
+<li>&#x8FDB;&#x7A0B;&#x5207;&#x6362;&#x9700;&#x8981;&#x7684;&#x8D44;&#x6E90;&#x5F88;&#x6700;&#x5927;&#xFF0C;&#x6548;&#x7387;&#x5F88;&#x4F4E;</li>
+<li>&#x7EBF;&#x7A0B;&#x5207;&#x6362;&#x9700;&#x8981;&#x7684;&#x8D44;&#x6E90;&#x4E00;&#x822C;&#xFF0C;&#x6548;&#x7387;&#x4E00;&#x822C;&#xFF08;&#x5F53;&#x7136;&#x4E86;&#x5728;&#x4E0D;&#x8003;&#x8651;GIL&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF09;</li>
+<li>&#x534F;&#x7A0B;&#x5207;&#x6362;&#x4EFB;&#x52A1;&#x8D44;&#x6E90;&#x5F88;&#x5C0F;&#xFF0C;&#x6548;&#x7387;&#x9AD8;</li>
+<li>&#x591A;&#x8FDB;&#x7A0B;&#x3001;&#x591A;&#x7EBF;&#x7A0B;&#x6839;&#x636E;cpu&#x6838;&#x6570;&#x4E0D;&#x4E00;&#x6837;&#x53EF;&#x80FD;&#x662F;&#x5E76;&#x884C;&#x7684;&#xFF0C;&#x4F46;&#x662F;&#x534F;&#x7A0B;&#x662F;&#x5728;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x4E2D; &#x6240;&#x4EE5;&#x662F;&#x5E76;&#x53D1; </li>
+</ol>
+<footer class="page-footer"><span class="copyright">CopyRight&#xA9;2018 &#x54B8;&#x9C7C;&#x8D85;&#x4EBA; all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x4FEE;&#x8BA2;&#x65F6;&#x95F4;&#xFF1A;
+2019-07-15 23:28:01
+</span></footer>
+                    
+                    </section>
+                
+                
+                </div>
+            </div>
+        </div>
+
+        
+        <a href="../files/multiprocessing05.html" class="navigation navigation-prev " aria-label="Previous page: 多进程拷贝文件"><i class="fa fa-angle-left"></i></a>
+        
+        
+        <a href="../files/gevent01.html" class="navigation navigation-next " aria-label="Next page: 协程的创建yield"><i class="fa fa-angle-right"></i></a>
+        
+    </div>
+</div>
+
+        
+<script src="../gitbook/app.js"></script>
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-toggle-chapters/toggle.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-splitter/splitter.js"></script>
+    
+
+    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-mcqx/js.cookie.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-mcqx/mcqx.js"></script>
+    
+
+    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-sectionx/sectionx.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-search/lunr.min.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-search/search.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-sharing/buttons.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-fontsettings/buttons.js"></script>
+    
+
+<script>
+require(["gitbook"], function(gitbook) {
+    var config = {"tbfed-pagefooter":{"copyright":"CopyRight©2018 咸鱼超人","modify_label":"该文件修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"sectionx":{"tag":"b"},"toggle-chapters":{},"splitter":{},"emphasize":{},"mcqx":{},"katex":{},"highlight":{},"search":{"maxIndexSize":1000000},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2}};
+    gitbook.start(config);
+});
+</script>
+
+        <!-- body:end -->
+    </body>
+    <!-- End of book 多任务 -->
+</html>

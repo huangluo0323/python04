@@ -1,0 +1,920 @@
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <!-- Start book 多任务 -->
+    <head>
+        <!-- head:start -->
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>协程的创建gevent | 多任务</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 2.6.7">
+        
+        
+        <meta name="HandheldFriendly" content="true"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+        <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+        
+    <link rel="stylesheet" href="../gitbook/style.css">
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-toggle-chapters/toggle.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-splitter/splitter.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-tbfed-pagefooter/footer.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-emphasize/plugin.css">
+        
+    
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-mcqx/mcqx.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-katex/katex.min.css">
+        
+    
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-sectionx/sectionx.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-highlight/website.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-search/search.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-fontsettings/website.css">
+        
+    
+    
+
+        
+    
+    
+    <link rel="next" href="../files/gevent04.html" />
+    
+    
+    <link rel="prev" href="../files/gevent02.html" />
+    
+
+        <!-- head:end -->
+    </head>
+    <body>
+        <!-- body:start -->
+        
+    <div class="book"
+        data-level="5.3"
+        data-chapter-title="协程的创建gevent"
+        data-filepath="files/gevent03.md"
+        data-basepath=".."
+        data-revision="Mon Jul 15 2019 23:28:46 GMT+0800 (中国标准时间)"
+        data-innerlanguage="">
+    
+
+<div class="book-summary">
+    <nav role="navigation">
+        <ul class="summary">
+            
+            
+            
+            
+
+            
+
+            
+    
+        <li class="chapter " data-level="0" data-path="index.html">
+            
+                
+                    <a href="../index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                        介绍
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1" data-path="files/udp.html">
+            
+                
+                    <a href="../files/udp.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.</b>
+                        
+                        .网络编程UDP
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.1" data-path="files/udp02.html">
+            
+                
+                    <a href="../files/udp02.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.1.</b>
+                        
+                        ip地址
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="files/udp03.html">
+            
+                
+                    <a href="../files/udp03.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.2.</b>
+                        
+                        端口
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="files/udp04.html">
+            
+                
+                    <a href="../files/udp04.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.3.</b>
+                        
+                        socket
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="files/udp05.html">
+            
+                
+                    <a href="../files/udp05.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.4.</b>
+                        
+                        udp网络程序
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="files/udp06.html">
+            
+                
+                    <a href="../files/udp06.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.5.</b>
+                        
+                        udp案例
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2" data-path="files/tcp.html">
+            
+                
+                    <a href="../files/tcp.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.</b>
+                        
+                        网络编程TCP
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1" data-path="files/tcp01.html">
+            
+                
+                    <a href="../files/tcp01.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.1.</b>
+                        
+                        tcp简介
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="files/tcp02.html">
+            
+                
+                    <a href="../files/tcp02.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.2.</b>
+                        
+                        tcp程序-客户端
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="files/tcp03.html">
+            
+                
+                    <a href="../files/tcp03.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.3.</b>
+                        
+                        tcp程序-服务器
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="files/tcp04.html">
+            
+                
+                    <a href="../files/tcp04.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.4.</b>
+                        
+                        tcp案例
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="files/tcp05.html">
+            
+                
+                    <a href="../files/tcp05.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.5.</b>
+                        
+                        tcp3次握手四次挥手
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.6" data-path="files/tcp06.html">
+            
+                
+                    <a href="../files/tcp06.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.6.</b>
+                        
+                        tcp长短连接
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.7" data-path="files/tcp07.html">
+            
+                
+                    <a href="../files/tcp07.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.7.</b>
+                        
+                        tcp/ip 协议
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="3" data-path="files/threading.html">
+            
+                
+                    <a href="../files/threading.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.</b>
+                        
+                        多任务-线程
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="3.1" data-path="files/threding01.html">
+            
+                
+                    <a href="../files/threding01.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.1.</b>
+                        
+                        多任务介绍
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="files/threding02.html">
+            
+                
+                    <a href="../files/threding02.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.2.</b>
+                        
+                        线程
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="files/ithreding03.html">
+            
+                
+                    <a href="../files/ithreding03.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.3.</b>
+                        
+                        线程补充
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4" data-path="files/ithreding04.html">
+            
+                
+                    <a href="../files/ithreding04.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.4.</b>
+                        
+                        线程共享全局变量
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="3.5" data-path="files/ithreding05.html">
+            
+                
+                    <a href="../files/ithreding05.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.5.</b>
+                        
+                        同步与互斥
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="3.6" data-path="files/ithreding06.html">
+            
+                
+                    <a href="../files/ithreding06.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.6.</b>
+                        
+                        互斥锁
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="3.7" data-path="files/ithreding07.html">
+            
+                
+                    <a href="../files/ithreding07.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.7.</b>
+                        
+                        死锁
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="3.8" data-path="files/ithreding08.html">
+            
+                
+                    <a href="../files/ithreding08.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.8.</b>
+                        
+                        多线程UDP聊天器
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="4" data-path="files/multiprocessing.html">
+            
+                
+                    <a href="../files/multiprocessing.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.</b>
+                        
+                        多任务-进程
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="4.1" data-path="files/multiprocessing01.html">
+            
+                
+                    <a href="../files/multiprocessing01.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.1.</b>
+                        
+                        进程与线程
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="files/multiprocessing02.html">
+            
+                
+                    <a href="../files/multiprocessing02.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.2.</b>
+                        
+                        进程的创建
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.3" data-path="files/multiprocessing03.html">
+            
+                
+                    <a href="../files/multiprocessing03.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.3.</b>
+                        
+                        进程间通信
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.4" data-path="files/multiprocessing04.html">
+            
+                
+                    <a href="../files/multiprocessing04.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.4.</b>
+                        
+                        进程池Pool
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.5" data-path="files/multiprocessing05.html">
+            
+                
+                    <a href="../files/multiprocessing05.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.5.</b>
+                        
+                        多进程拷贝文件
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="5" data-path="files/gevent.html">
+            
+                
+                    <a href="../files/gevent.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.</b>
+                        
+                        多任务-协程
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="5.1" data-path="files/gevent01.html">
+            
+                
+                    <a href="../files/gevent01.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.1.</b>
+                        
+                        协程的创建yield
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" data-path="files/gevent02.html">
+            
+                
+                    <a href="../files/gevent02.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.2.</b>
+                        
+                        协程的创建greenlet
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter active" data-level="5.3" data-path="files/gevent03.html">
+            
+                
+                    <a href="../files/gevent03.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.3.</b>
+                        
+                        协程的创建gevent
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.4" data-path="files/gevent04.html">
+            
+                
+                    <a href="../files/gevent04.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.4.</b>
+                        
+                        协程并发下载
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+
+            
+            <li class="divider"></li>
+            <li>
+                <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+                    本书使用 GitBook 发布
+                </a>
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header" role="navigation">
+    <!-- Actions Left -->
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../" >多任务</a>
+    </h1>
+</div>
+
+            <div class="page-wrapper" tabindex="-1" role="main">
+                <div class="page-inner">
+                
+                
+                    <section class="normal" id="section-">
+                    
+                        <h1 id="&#x534F;&#x7A0B;&#x7684;&#x521B;&#x5EFA;gevent">&#x534F;&#x7A0B;&#x7684;&#x521B;&#x5EFA;gevent</h1>
+<p>greenlet&#x5DF2;&#x7ECF;&#x5B9E;&#x73B0;&#x4E86;&#x534F;&#x7A0B;&#xFF0C;&#x4F46;&#x662F;&#x8FD9;&#x4E2A;&#x8FD8;&#x7684;&#x4EBA;&#x5DE5;&#x5207;&#x6362;&#xFF0C;&#x662F;&#x4E0D;&#x662F;&#x89C9;&#x5F97;&#x592A;&#x9EBB;&#x70E6;&#x4E86;&#xFF0C;&#x4E0D;&#x8981;&#x6349;&#x6025;&#xFF0C;python&#x8FD8;&#x6709;&#x4E00;&#x4E2A;&#x6BD4;greenlet&#x66F4;&#x5F3A;&#x5927;&#x7684;&#x5E76;&#x4E14;&#x80FD;&#x591F;&#x81EA;&#x52A8;&#x5207;&#x6362;&#x4EFB;&#x52A1;&#x7684;&#x6A21;&#x5757;<code>gevent</code></p>
+<p>&#x5176;&#x539F;&#x7406;&#x662F;&#x5F53;&#x4E00;&#x4E2A;greenlet&#x9047;&#x5230;IO(&#x6307;&#x7684;&#x662F;input output &#x8F93;&#x5165;&#x8F93;&#x51FA;&#xFF0C;&#x6BD4;&#x5982;&#x7F51;&#x7EDC;&#x3001;&#x6587;&#x4EF6;&#x64CD;&#x4F5C;&#x7B49;)&#x64CD;&#x4F5C;&#x65F6;&#xFF0C;&#x6BD4;&#x5982;&#x8BBF;&#x95EE;&#x7F51;&#x7EDC;&#xFF0C;&#x5C31;&#x81EA;&#x52A8;&#x5207;&#x6362;&#x5230;&#x5176;&#x4ED6;&#x7684;greenlet&#xFF0C;&#x7B49;&#x5230;IO&#x64CD;&#x4F5C;&#x5B8C;&#x6210;&#xFF0C;&#x518D;&#x5728;&#x9002;&#x5F53;&#x7684;&#x65F6;&#x5019;&#x5207;&#x6362;&#x56DE;&#x6765;&#x7EE7;&#x7EED;&#x6267;&#x884C;&#x3002;</p>
+<p>&#x7531;&#x4E8E;IO&#x64CD;&#x4F5C;&#x975E;&#x5E38;&#x8017;&#x65F6;&#xFF0C;&#x7ECF;&#x5E38;&#x4F7F;&#x7A0B;&#x5E8F;&#x5904;&#x4E8E;&#x7B49;&#x5F85;&#x72B6;&#x6001;&#xFF0C;&#x6709;&#x4E86;gevent&#x4E3A;&#x6211;&#x4EEC;&#x81EA;&#x52A8;&#x5207;&#x6362;&#x534F;&#x7A0B;&#xFF0C;&#x5C31;&#x4FDD;&#x8BC1;&#x603B;&#x6709;greenlet&#x5728;&#x8FD0;&#x884C;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x7B49;&#x5F85;IO</p>
+<h3 id="&#x5B89;&#x88C5;">&#x5B89;&#x88C5;</h3>
+<pre><code class="lang-python">pip3 install gevent
+</code></pre>
+<h3 id="1-gevent&#x7684;&#x4F7F;&#x7528;">1. gevent&#x7684;&#x4F7F;&#x7528;</h3>
+<pre><code class="lang-python"><span class="hljs-keyword">import</span> gevent
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(n)</span>:</span>
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(n):
+        print(gevent.getcurrent(), i)
+
+g1 = gevent.spawn(f, <span class="hljs-number">5</span>)
+g2 = gevent.spawn(f, <span class="hljs-number">5</span>)
+g3 = gevent.spawn(f, <span class="hljs-number">5</span>)
+g1.join()
+g2.join()
+g3.join()
+</code></pre>
+<p>&#x8FD0;&#x884C;&#x7ED3;&#x679C;</p>
+<pre><code class="lang-python">&lt;Greenlet at <span class="hljs-number">0x10e49f550</span>: f(<span class="hljs-number">5</span>)&gt; <span class="hljs-number">0</span>
+&lt;Greenlet at <span class="hljs-number">0x10e49f550</span>: f(<span class="hljs-number">5</span>)&gt; <span class="hljs-number">1</span>
+&lt;Greenlet at <span class="hljs-number">0x10e49f550</span>: f(<span class="hljs-number">5</span>)&gt; <span class="hljs-number">2</span>
+&lt;Greenlet at <span class="hljs-number">0x10e49f550</span>: f(<span class="hljs-number">5</span>)&gt; <span class="hljs-number">3</span>
+&lt;Greenlet at <span class="hljs-number">0x10e49f550</span>: f(<span class="hljs-number">5</span>)&gt; <span class="hljs-number">4</span>
+&lt;Greenlet at <span class="hljs-number">0x10e49f910</span>: f(<span class="hljs-number">5</span>)&gt; <span class="hljs-number">0</span>
+&lt;Greenlet at <span class="hljs-number">0x10e49f910</span>: f(<span class="hljs-number">5</span>)&gt; <span class="hljs-number">1</span>
+&lt;Greenlet at <span class="hljs-number">0x10e49f910</span>: f(<span class="hljs-number">5</span>)&gt; <span class="hljs-number">2</span>
+&lt;Greenlet at <span class="hljs-number">0x10e49f910</span>: f(<span class="hljs-number">5</span>)&gt; <span class="hljs-number">3</span>
+&lt;Greenlet at <span class="hljs-number">0x10e49f910</span>: f(<span class="hljs-number">5</span>)&gt; <span class="hljs-number">4</span>
+&lt;Greenlet at <span class="hljs-number">0x10e49f4b0</span>: f(<span class="hljs-number">5</span>)&gt; <span class="hljs-number">0</span>
+&lt;Greenlet at <span class="hljs-number">0x10e49f4b0</span>: f(<span class="hljs-number">5</span>)&gt; <span class="hljs-number">1</span>
+&lt;Greenlet at <span class="hljs-number">0x10e49f4b0</span>: f(<span class="hljs-number">5</span>)&gt; <span class="hljs-number">2</span>
+&lt;Greenlet at <span class="hljs-number">0x10e49f4b0</span>: f(<span class="hljs-number">5</span>)&gt; <span class="hljs-number">3</span>
+&lt;Greenlet at <span class="hljs-number">0x10e49f4b0</span>: f(<span class="hljs-number">5</span>)&gt; <span class="hljs-number">4</span>
+</code></pre>
+<p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#xFF0C;3&#x4E2A;greenlet&#x662F;&#x4F9D;&#x6B21;&#x8FD0;&#x884C;&#x800C;&#x4E0D;&#x662F;&#x4EA4;&#x66FF;&#x8FD0;&#x884C;</p>
+<h3 id="2-gevent&#x5207;&#x6362;&#x6267;&#x884C;">2. gevent&#x5207;&#x6362;&#x6267;&#x884C;</h3>
+<pre><code class="lang-python"><span class="hljs-keyword">import</span> gevent
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span><span class="hljs-params">(n)</span>:</span>
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(n):
+        print(gevent.getcurrent(), i)
+        <span class="hljs-comment">#&#x7528;&#x6765;&#x6A21;&#x62DF;&#x4E00;&#x4E2A;&#x8017;&#x65F6;&#x64CD;&#x4F5C;&#xFF0C;&#x6CE8;&#x610F;&#x4E0D;&#x662F;time&#x6A21;&#x5757;&#x4E2D;&#x7684;sleep</span>
+        gevent.sleep(<span class="hljs-number">1</span>)
+
+g1 = gevent.spawn(f, <span class="hljs-number">5</span>)
+g2 = gevent.spawn(f, <span class="hljs-number">5</span>)
+g3 = gevent.spawn(f, <span class="hljs-number">5</span>)
+g1.join()
+g2.join()
+g3.join()
+</code></pre>
+<p>&#x8FD0;&#x884C;&#x7ED3;&#x679C;</p>
+<pre><code class="lang-python">&lt;Greenlet at <span class="hljs-number">0x7fa70ffa1c30</span>: f(<span class="hljs-number">5</span>)&gt; <span class="hljs-number">0</span>
+&lt;Greenlet at <span class="hljs-number">0x7fa70ffa1870</span>: f(<span class="hljs-number">5</span>)&gt; <span class="hljs-number">0</span>
+&lt;Greenlet at <span class="hljs-number">0x7fa70ffa1eb0</span>: f(<span class="hljs-number">5</span>)&gt; <span class="hljs-number">0</span>
+&lt;Greenlet at <span class="hljs-number">0x7fa70ffa1c30</span>: f(<span class="hljs-number">5</span>)&gt; <span class="hljs-number">1</span>
+&lt;Greenlet at <span class="hljs-number">0x7fa70ffa1870</span>: f(<span class="hljs-number">5</span>)&gt; <span class="hljs-number">1</span>
+&lt;Greenlet at <span class="hljs-number">0x7fa70ffa1eb0</span>: f(<span class="hljs-number">5</span>)&gt; <span class="hljs-number">1</span>
+&lt;Greenlet at <span class="hljs-number">0x7fa70ffa1c30</span>: f(<span class="hljs-number">5</span>)&gt; <span class="hljs-number">2</span>
+&lt;Greenlet at <span class="hljs-number">0x7fa70ffa1870</span>: f(<span class="hljs-number">5</span>)&gt; <span class="hljs-number">2</span>
+&lt;Greenlet at <span class="hljs-number">0x7fa70ffa1eb0</span>: f(<span class="hljs-number">5</span>)&gt; <span class="hljs-number">2</span>
+&lt;Greenlet at <span class="hljs-number">0x7fa70ffa1c30</span>: f(<span class="hljs-number">5</span>)&gt; <span class="hljs-number">3</span>
+&lt;Greenlet at <span class="hljs-number">0x7fa70ffa1870</span>: f(<span class="hljs-number">5</span>)&gt; <span class="hljs-number">3</span>
+&lt;Greenlet at <span class="hljs-number">0x7fa70ffa1eb0</span>: f(<span class="hljs-number">5</span>)&gt; <span class="hljs-number">3</span>
+&lt;Greenlet at <span class="hljs-number">0x7fa70ffa1c30</span>: f(<span class="hljs-number">5</span>)&gt; <span class="hljs-number">4</span>
+&lt;Greenlet at <span class="hljs-number">0x7fa70ffa1870</span>: f(<span class="hljs-number">5</span>)&gt; <span class="hljs-number">4</span>
+&lt;Greenlet at <span class="hljs-number">0x7fa70ffa1eb0</span>: f(<span class="hljs-number">5</span>)&gt; <span class="hljs-number">4</span>
+</code></pre>
+<h3 id="3-&#x7ED9;&#x7A0B;&#x5E8F;&#x6253;&#x8865;&#x4E01;">3. &#x7ED9;&#x7A0B;&#x5E8F;&#x6253;&#x8865;&#x4E01;</h3>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> gevent <span class="hljs-keyword">import</span> monkey
+<span class="hljs-keyword">import</span> gevent
+<span class="hljs-keyword">import</span> random
+<span class="hljs-keyword">import</span> time
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">coroutine_work</span><span class="hljs-params">(coroutine_name)</span>:</span>
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>):
+        print(coroutine_name, i)
+        time.sleep(random.random())
+
+gevent.joinall([
+        gevent.spawn(coroutine_work, <span class="hljs-string">&quot;work1&quot;</span>),
+        gevent.spawn(coroutine_work, <span class="hljs-string">&quot;work2&quot;</span>)
+])
+</code></pre>
+<p>&#x8FD0;&#x884C;&#x7ED3;&#x679C;</p>
+<pre><code class="lang-python">work1 <span class="hljs-number">0</span>
+work1 <span class="hljs-number">1</span>
+work1 <span class="hljs-number">2</span>
+work1 <span class="hljs-number">3</span>
+work1 <span class="hljs-number">4</span>
+work1 <span class="hljs-number">5</span>
+work1 <span class="hljs-number">6</span>
+work1 <span class="hljs-number">7</span>
+work1 <span class="hljs-number">8</span>
+work1 <span class="hljs-number">9</span>
+work2 <span class="hljs-number">0</span>
+work2 <span class="hljs-number">1</span>
+work2 <span class="hljs-number">2</span>
+work2 <span class="hljs-number">3</span>
+work2 <span class="hljs-number">4</span>
+work2 <span class="hljs-number">5</span>
+work2 <span class="hljs-number">6</span>
+work2 <span class="hljs-number">7</span>
+work2 <span class="hljs-number">8</span>
+work2 <span class="hljs-number">9</span>
+<span class="hljs-keyword">from</span> gevent <span class="hljs-keyword">import</span> monkey
+<span class="hljs-keyword">import</span> gevent
+<span class="hljs-keyword">import</span> random
+<span class="hljs-keyword">import</span> time
+
+<span class="hljs-comment"># &#x6709;&#x8017;&#x65F6;&#x64CD;&#x4F5C;&#x65F6;&#x9700;&#x8981;</span>
+monkey.patch_all()  <span class="hljs-comment"># &#x5C06;&#x7A0B;&#x5E8F;&#x4E2D;&#x7528;&#x5230;&#x7684;&#x8017;&#x65F6;&#x64CD;&#x4F5C;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x6362;&#x4E3A;gevent&#x4E2D;&#x81EA;&#x5DF1;&#x5B9E;&#x73B0;&#x7684;&#x6A21;&#x5757;</span>
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">coroutine_work</span><span class="hljs-params">(coroutine_name)</span>:</span>
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>):
+        print(coroutine_name, i)
+        time.sleep(random.random())
+
+gevent.joinall([
+        gevent.spawn(coroutine_work, <span class="hljs-string">&quot;work1&quot;</span>),
+        gevent.spawn(coroutine_work, <span class="hljs-string">&quot;work2&quot;</span>)
+])
+</code></pre>
+<p>&#x8FD0;&#x884C;&#x7ED3;&#x679C;</p>
+<pre><code class="lang-python">work1 <span class="hljs-number">0</span>
+work2 <span class="hljs-number">0</span>
+work1 <span class="hljs-number">1</span>
+work1 <span class="hljs-number">2</span>
+work1 <span class="hljs-number">3</span>
+work2 <span class="hljs-number">1</span>
+work1 <span class="hljs-number">4</span>
+work2 <span class="hljs-number">2</span>
+work1 <span class="hljs-number">5</span>
+work2 <span class="hljs-number">3</span>
+work1 <span class="hljs-number">6</span>
+work1 <span class="hljs-number">7</span>
+work1 <span class="hljs-number">8</span>
+work2 <span class="hljs-number">4</span>
+work2 <span class="hljs-number">5</span>
+work1 <span class="hljs-number">9</span>
+work2 <span class="hljs-number">6</span>
+work2 <span class="hljs-number">7</span>
+work2 <span class="hljs-number">8</span>
+work2 <span class="hljs-number">9</span>
+</code></pre>
+<footer class="page-footer"><span class="copyright">CopyRight&#xA9;2018 &#x54B8;&#x9C7C;&#x8D85;&#x4EBA; all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x4FEE;&#x8BA2;&#x65F6;&#x95F4;&#xFF1A;
+2019-07-15 23:28:29
+</span></footer>
+                    
+                    </section>
+                
+                
+                </div>
+            </div>
+        </div>
+
+        
+        <a href="../files/gevent02.html" class="navigation navigation-prev " aria-label="Previous page: 协程的创建greenlet"><i class="fa fa-angle-left"></i></a>
+        
+        
+        <a href="../files/gevent04.html" class="navigation navigation-next " aria-label="Next page: 协程并发下载"><i class="fa fa-angle-right"></i></a>
+        
+    </div>
+</div>
+
+        
+<script src="../gitbook/app.js"></script>
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-toggle-chapters/toggle.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-splitter/splitter.js"></script>
+    
+
+    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-mcqx/js.cookie.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-mcqx/mcqx.js"></script>
+    
+
+    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-sectionx/sectionx.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-search/lunr.min.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-search/search.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-sharing/buttons.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-fontsettings/buttons.js"></script>
+    
+
+<script>
+require(["gitbook"], function(gitbook) {
+    var config = {"tbfed-pagefooter":{"copyright":"CopyRight©2018 咸鱼超人","modify_label":"该文件修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"sectionx":{"tag":"b"},"toggle-chapters":{},"splitter":{},"emphasize":{},"mcqx":{},"katex":{},"highlight":{},"search":{"maxIndexSize":1000000},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2}};
+    gitbook.start(config);
+});
+</script>
+
+        <!-- body:end -->
+    </body>
+    <!-- End of book 多任务 -->
+</html>
